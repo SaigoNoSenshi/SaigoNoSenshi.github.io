@@ -177,7 +177,7 @@ export const projects = [
     summary: "Coloring, drawing, tracing and music app for kids: photo-to-coloring-page, procedurally generated pages, bilingual English/Filipino, works offline.",
     stack: ["HTML", "JavaScript", "PWA"] },
   { kind: "personal", name: "Pivren OS", repo: "pivren-public", public: false,
-    summary: "Personal startup concept site and operating plan.",
+    summary: "Technical specification for a lead-capture marketing site: multi-step qualification form, bot protection, PostgreSQL lead store, email and a signed webhook.",
     stack: ["React"] },
   { kind: "personal", name: "Bloom", repo: "bloom-habit-planner", public: false,
     summary: "Personal efficiency app.",
