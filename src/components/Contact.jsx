@@ -25,7 +25,9 @@ export default function Contact() {
               >
                 <Icon size={22} strokeWidth={1.75} className="text-primary" aria-hidden="true" />
                 <span className="font-heading text-lg font-semibold">{label}</span>
-                <span className="font-mono text-xs text-muted [overflow-wrap:anywhere]">{text}</span>
+                <span className="font-mono text-xs text-muted [overflow-wrap:anywhere]">
+                  {text.split('/').map((part, j) => (j ? ['/', <wbr key={j} />, part] : part))}
+                </span>
               </a>
             </Reveal>
           </li>
