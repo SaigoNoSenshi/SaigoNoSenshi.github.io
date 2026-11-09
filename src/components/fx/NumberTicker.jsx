@@ -1,4 +1,4 @@
-// Source: https://magicui.design/r/number-ticker.json | Licence: MIT | Adapted for jp-portfolio
+// Source: https://magicui.design/r/number-ticker.json | Licence: MIT | Adapted for jp-portfolio | Copyright and licence text: design/THIRD_PARTY_LICENSES.md
 import { useEffect, useRef } from 'react'
 import { useInView, useMotionValue, useReducedMotion, useSpring } from 'motion/react'
 

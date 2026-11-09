@@ -1,11 +1,11 @@
-import { useState } from 'react'
 import { profile } from '../content'
 
-// Drop the real photo at public/photo.jpg; until it exists the frame shows a monogram.
+// Drop the real photo at src/assets/photo.jpg (jpeg, png or webp also work); until it exists the frame shows a monogram.
+const photo = Object.values(import.meta.glob('../assets/photo.{jpg,jpeg,png,webp}', { eager: true, import: 'default' }))[0]
+
 export default function Portrait({ className = '' }) {
-  const [missing, setMissing] = useState(false)
-  if (!missing) {
-    return <img src="/photo.jpg" alt={profile.name} onError={() => setMissing(true)} className={`aspect-[4/5] w-full rounded-xl border border-line bg-raised object-cover ${className}`} />
+  if (photo) {
+    return <img src={photo} alt={profile.name} className={`aspect-[4/5] w-full rounded-xl border border-line bg-raised object-cover ${className}`} />
   }
   return (
     <div role="img" aria-label={`${profile.name}, photo placeholder`} className={`relative grid aspect-[4/5] w-full place-items-center rounded-xl border border-line bg-raised ${className}`}>

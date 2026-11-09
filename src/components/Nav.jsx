@@ -10,11 +10,9 @@ const links = [
   ['Contact', '#contact'],
 ]
 
-const clockFormat = (timeZone) => new Intl.DateTimeFormat('en-GB', { timeZone, hour: '2-digit', minute: '2-digit', hourCycle: 'h23' })
-const manila = clockFormat('Asia/Manila')
-const chicago = clockFormat('America/Chicago')
+const manila = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Manila', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' })
 
-// Real times in both zones: the night shift in Manila overlaps the US business day.
+// Real Manila time; the night shift overlaps the US business day (content.js: Philippines, UTC+8, working US hours).
 function Clock() {
   const [now, setNow] = useState(() => new Date())
   useEffect(() => {
@@ -22,15 +20,13 @@ function Clock() {
     return () => clearInterval(id)
   }, [])
   return (
-    <p className="flex items-center gap-2 whitespace-nowrap font-mono text-[0.6875rem] text-muted md:text-xs">
+    <p className="hidden items-center gap-2 whitespace-nowrap font-mono text-[0.6875rem] text-muted min-[360px]:flex md:text-xs">
       <span aria-hidden="true" className="led size-2 rounded-full bg-ok" />
       <span>
         Manila <span className="text-fg">{manila.format(now)}</span>
       </span>
       <span aria-hidden="true">·</span>
-      <span>
-        Chicago <span className="text-fg">{chicago.format(now)}</span>
-      </span>
+      <span>on US hours</span>
     </p>
   )
 }
@@ -56,7 +52,7 @@ export default function Nav() {
         <Clock />
         <button
           type="button"
-          className="icon-link md:hidden"
+          className="icon-link shrink-0 md:hidden"
           aria-expanded={open}
           aria-controls="mobile-menu"
           aria-label={open ? 'Close menu' : 'Open menu'}

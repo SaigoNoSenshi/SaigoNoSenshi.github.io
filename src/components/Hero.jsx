@@ -5,7 +5,7 @@ import { profile } from '../content'
 import DecryptedText from './fx/DecryptedText'
 import { Reveal } from './ui'
 
-const Threads = lazy(() => import('./fx/Threads'))
+const Threads = lazy(() => import('./fx/Threads').catch(() => ({ default: () => null })))
 
 // The threads are the signal: many lines carrying one wave, converging as they travel right.
 function Backdrop() {
@@ -23,7 +23,7 @@ function Backdrop() {
           <Threads color="#2DD4BF" accentColor="#60A5FA" amplitude={1.5} distance={0.38} lineCount={64} thickness={0.7} brightness={1.1} angle={-8} enableMouseInteraction />
         </Suspense>
       )}
-      <div className="absolute inset-0 bg-gradient-to-r from-shell via-shell/75 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-r from-shell via-shell/75 to-transparent max-md:via-shell/90 max-md:to-shell/70" />
       <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-shell to-transparent" />
     </div>
   )
@@ -43,7 +43,7 @@ export default function Hero() {
             <DecryptedText text={name} animateOn="view" sequential speed={55} revealDirection="start" scrambleColor="var(--color-teal)" />
           </h1>
           <Reveal delay={0.1}>
-            <p className="mt-6 max-w-[40ch] text-lg leading-relaxed text-fg/90 md:text-xl">{pitch}</p>
+            <p className="mt-6 max-w-[40ch] text-lg leading-relaxed text-fg md:text-xl">{pitch}</p>
           </Reveal>
           <Reveal delay={0.18}>
             <div className="mt-9 flex flex-wrap items-center gap-3">

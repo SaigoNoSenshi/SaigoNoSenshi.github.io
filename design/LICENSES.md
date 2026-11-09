@@ -4,10 +4,9 @@
 
 | Component | File | Source URL | Licence (verbatim name) | Attribution required | Date |
 |---|---|---|---|---|---|
-| Threads (React Bits, JS + Tailwind variant, self-contained WebGL2, no ogl) | src/components/fx/Threads.jsx | https://github.com/DavidHDev/react-bits/blob/main/src/tailwind/Backgrounds/Threads/Threads.jsx | MIT + Commons Clause License Condition v1.0 | no (copyright notice kept in source header) | 2026-11-09 |
-| DecryptedText (React Bits, JS + Tailwind variant) | src/components/fx/DecryptedText.jsx | https://github.com/DavidHDev/react-bits/blob/main/src/tailwind/TextAnimations/DecryptedText/DecryptedText.jsx | MIT + Commons Clause License Condition v1.0 | no | 2026-11-09 |
-| NumberTicker (Magic UI; TypeScript stripped, cn() and direction/startValue/decimalPlaces removed, spring tuned, reduced-motion shows final value) | src/components/fx/NumberTicker.jsx | https://magicui.design/r/number-ticker.json | MIT License | no (licence text kept at https://github.com/magicuidesign/magicui) | 2026-11-09 |
-| CardSpotlight (Aceternity UI; only the pointer-following mask kept, CanvasRevealEffect left out because it needs three) | src/components/fx/CardSpotlight.jsx | https://ui.aceternity.com/registry/card-spotlight.json | Aceternity License (https://ui.aceternity.com/licence) | no | 2026-11-09 |
+| Threads (React Bits, JS + Tailwind variant, self-contained WebGL2, no ogl) | src/components/fx/Threads.jsx | https://github.com/DavidHDev/react-bits/blob/main/src/tailwind/Backgrounds/Threads/Threads.jsx | MIT + Commons Clause License Condition v1.0 | no (copyright + licence text in design/THIRD_PARTY_LICENSES.md, header points to it) | 2026-11-09 |
+| DecryptedText (React Bits, JS + Tailwind variant) | src/components/fx/DecryptedText.jsx | https://github.com/DavidHDev/react-bits/blob/main/src/tailwind/TextAnimations/DecryptedText/DecryptedText.jsx | MIT + Commons Clause License Condition v1.0 | no (copyright + licence text in design/THIRD_PARTY_LICENSES.md, header points to it) | 2026-11-09 |
+| NumberTicker (Magic UI; TypeScript stripped, cn() and direction/startValue/decimalPlaces removed, spring tuned, reduced-motion shows final value) | src/components/fx/NumberTicker.jsx | https://magicui.design/r/number-ticker.json | MIT License | no (copyright + licence text in design/THIRD_PARTY_LICENSES.md, header points to it) | 2026-11-09 |
 
 React Bits licence: components may be used in an application, website or product; they may not be sold, sublicensed or redistributed as components. This site is a personal portfolio and does not redistribute them.
 

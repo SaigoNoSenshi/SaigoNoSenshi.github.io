@@ -47,7 +47,7 @@ function Schematic({ stack }) {
             key={s}
             className="relative py-1 pr-7 before:absolute before:right-0 before:top-0 before:h-full before:w-px before:bg-teal/50 after:absolute after:right-0 after:top-1/2 after:h-px after:w-7 after:bg-teal/50 first:before:top-1/2 first:before:h-1/2 last:before:h-1/2"
           >
-            <span className="block truncate rounded border border-line bg-shell px-2.5 py-1.5 font-mono text-xs" title={s}>
+            <span className="block break-words rounded border border-line bg-shell px-2.5 py-1.5 font-mono text-xs">
               {s}
             </span>
           </li>
@@ -91,10 +91,10 @@ function IndexRow({ p }) {
   return (
     <li className="grid items-baseline gap-x-6 gap-y-1 border-b border-line py-3.5 last:border-b-0 md:grid-cols-[minmax(0,1.1fr)_minmax(0,2fr)_minmax(0,1.1fr)_minmax(0,9.5rem)]">
       <p className="min-w-0 font-display text-base font-semibold leading-snug">{p.name}</p>
-      <p className="min-w-0 text-sm leading-relaxed text-muted md:truncate" title={p.summary}>
+      <p className="min-w-0 text-sm leading-relaxed text-muted">
         {p.summary}
       </p>
-      <p className="min-w-0 font-mono text-xs text-muted md:truncate" title={p.stack.join(', ')}>
+      <p className="min-w-0 font-mono text-xs text-muted">
         {p.stack.join(' · ')}
       </p>
       <p className="flex min-w-0 flex-wrap items-center gap-x-4 text-xs md:justify-end">

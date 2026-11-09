@@ -1,4 +1,4 @@
-// Source: https://github.com/DavidHDev/react-bits/blob/main/src/tailwind/TextAnimations/DecryptedText/DecryptedText.jsx | Licence: MIT + Commons Clause License Condition v1.0 | Adapted for jp-portfolio
+// Source: https://github.com/DavidHDev/react-bits/blob/main/src/tailwind/TextAnimations/DecryptedText/DecryptedText.jsx | Licence: MIT + Commons Clause License Condition v1.0 | Adapted for jp-portfolio | Copyright and licence text: design/THIRD_PARTY_LICENSES.md
 'use client';
 
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
@@ -533,7 +533,7 @@ export default function DecryptedText({
     >
       <span className="sr-only">{chars.join('')}</span>
 
-      <span aria-hidden="true">
+      <span aria-hidden="true" className="select-none">
         {groups.map(group =>
           typeof group === 'string' ? (
             group

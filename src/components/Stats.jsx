@@ -16,8 +16,7 @@ export default function Stats() {
           {stats.map((s, i) => {
             const [n, suffix] = split(s.value)
             return (
-              <Reveal key={s.value} delay={i * 0.04}>
-                <div className="tick group grid items-baseline gap-x-8 gap-y-1 border-b border-line py-5 last:border-b-0 md:grid-cols-[minmax(0,15rem)_minmax(0,1fr)] md:py-6">
+              <Reveal key={s.value} delay={i * 0.04} className="tick group grid items-baseline gap-x-8 gap-y-1 border-b border-line py-5 last:border-b-0 md:grid-cols-[minmax(0,15rem)_minmax(0,1fr)] md:py-6">
                   <dt className="font-display text-5xl font-bold leading-none tracking-tight text-fg md:text-7xl">
                     <span className="sr-only">{s.value}</span>
                     <span aria-hidden="true">
@@ -26,7 +25,6 @@ export default function Stats() {
                     </span>
                   </dt>
                   <dd className="max-w-[55ch] text-base leading-relaxed text-muted md:text-lg">{s.label}</dd>
-                </div>
               </Reveal>
             )
           })}

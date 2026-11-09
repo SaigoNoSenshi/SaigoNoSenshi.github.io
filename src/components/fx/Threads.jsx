@@ -1,4 +1,4 @@
-// Source: https://github.com/DavidHDev/react-bits/blob/main/src/tailwind/Backgrounds/Threads/Threads.jsx | Licence: MIT + Commons Clause License Condition v1.0 | Adapted for jp-portfolio
+// Source: https://github.com/DavidHDev/react-bits/blob/main/src/tailwind/Backgrounds/Threads/Threads.jsx | Licence: MIT + Commons Clause License Condition v1.0 | Adapted for jp-portfolio | Copyright and licence text: design/THIRD_PARTY_LICENSES.md
 'use client';
 
 import { useEffect, useRef } from 'react';
@@ -455,6 +455,7 @@ const Threads = ({
     };
 
     const onPointerMove = event => {
+      if (!visible) return;
       const rect = container.getBoundingClientRect();
       const x = (event.clientX - rect.left) / Math.max(1, rect.width);
       const y = (event.clientY - rect.top) / Math.max(1, rect.height);
