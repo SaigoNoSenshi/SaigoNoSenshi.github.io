@@ -1,50 +1,46 @@
-import { Award } from 'lucide-react'
 import { certifications, education, skills } from '../content'
 import { Reveal, Section } from './ui'
+
+// Ordered the way data moves: where it lives, where it is stored, how it is read, what acts on it, what people use.
+const order = ['Platforms', 'Cloud & data', 'Analytics', 'Agents & automation', 'AI & LLMs', 'Apps']
 
 export default function Skills() {
   return (
     <Section id="skills" title="Skills">
-      <dl className="mt-10 divide-y divide-hairline border-y border-hairline">
-        {Object.entries(skills).map(([group, items]) => (
+      <div className="mt-12 border-b border-line">
+        {order.map((group, i) => (
           <Reveal key={group}>
-            <div className="grid gap-3 py-5 md:grid-cols-[13rem_1fr] md:gap-8">
-              <dt className="font-heading text-base font-semibold">{group}</dt>
-              <dd>
-                <ul className="flex flex-wrap gap-2">
-                  {items.map((s) => (
-                    <li key={s} className="chip">
-                      {s}
-                    </li>
-                  ))}
-                </ul>
-              </dd>
+            <div className="tick grid border-t border-line md:grid-cols-[13rem_minmax(0,1fr)]">
+              <h3 className="flex items-center gap-3 px-1 py-3 font-display text-lg font-bold md:py-0">
+                <span className="font-mono text-xs font-medium text-amber">{String(i + 1).padStart(2, '0')}</span>
+                {group}
+              </h3>
+              <ul className="flex flex-wrap gap-px bg-line md:border-l md:border-line">
+                {skills[group].map((s) => (
+                  <li key={s} className="flex min-h-11 grow basis-[9.5rem] items-center bg-shell px-3 py-2 font-mono text-xs leading-snug">
+                    {s}
+                  </li>
+                ))}
+              </ul>
             </div>
           </Reveal>
         ))}
-      </dl>
+      </div>
 
       <Reveal>
-        <h3 className="mt-16 font-heading text-2xl font-semibold tracking-tight">Certifications</h3>
+        <h3 className="mt-20 font-display text-2xl font-bold tracking-tight">Certifications</h3>
       </Reveal>
-      <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {certifications.map((c, i) => (
-          <li key={c.name}>
-            <Reveal delay={(i % 3) * 0.05} className="h-full">
-              <div className="card flex h-full items-start gap-3 p-5">
-                <Award size={20} strokeWidth={1.75} className="mt-0.5 shrink-0 text-primary" aria-hidden="true" />
-                <div>
-                  <p className="text-[0.9375rem] font-medium leading-snug">{c.name}</p>
-                  <p className="mt-1 font-mono text-xs text-muted">{c.issuer}</p>
-                </div>
-              </div>
-            </Reveal>
+      <ul className="mt-6 gap-x-12 border-t border-line md:columns-2">
+        {certifications.map((c) => (
+          <li key={c.name} className="flex break-inside-avoid items-baseline justify-between gap-4 border-b border-line py-3">
+            <span className="min-w-0 font-medium leading-snug">{c.name}</span>
+            <span className="shrink-0 font-mono text-xs text-muted">{c.issuer}</span>
           </li>
         ))}
       </ul>
 
       <Reveal>
-        <h3 className="mt-16 font-heading text-2xl font-semibold tracking-tight">Education</h3>
+        <h3 className="mt-16 font-display text-2xl font-bold tracking-tight">Education</h3>
         <p className="mt-4 text-fg/90">
           {education.degree}, {education.school}
         </p>

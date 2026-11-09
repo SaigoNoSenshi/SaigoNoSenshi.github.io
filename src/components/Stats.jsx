@@ -1,45 +1,37 @@
-import { useEffect, useRef } from 'react'
-import { animate, useInView, useReducedMotion } from 'motion/react'
 import { stats } from '../content'
+import { NumberTicker } from './fx/NumberTicker'
+import { Reveal } from './ui'
 
-function Stat({ value, label }) {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true })
-  const reduce = useReducedMotion()
-  const [, num, suffix] = value.match(/^(\d+)(.*)$/)
-
-  useEffect(() => {
-    if (reduce || !inView) return
-    const controls = animate(0, Number(num), {
-      duration: 1.2,
-      ease: [0.23, 1, 0.32, 1],
-      onUpdate: (v) => {
-        ref.current.textContent = Math.round(v) + suffix
-      },
-    })
-    return () => controls.stop()
-  }, [inView, reduce, num, suffix])
-
-  return (
-    <>
-      <dt ref={ref} className="font-mono text-4xl font-medium tabular-nums text-amber md:text-5xl">
-        {reduce ? value : `0${suffix}`}
-      </dt>
-      <dd className="mt-3 max-w-[28ch] text-sm leading-relaxed text-muted">{label}</dd>
-    </>
-  )
+// "95%+" -> 95 and "%+": the number ticks, the suffix stays.
+const split = (value) => {
+  const n = parseFloat(value)
+  return [n, value.slice(String(n).length)]
 }
 
 export default function Stats() {
   return (
-    <section aria-label="Impact" className="border-y border-hairline bg-surface/60">
-      <dl className="wrap grid divide-y divide-hairline sm:grid-cols-2 sm:divide-y-0 lg:grid-cols-5 lg:divide-x">
-        {stats.map((s, i) => (
-          <div key={s.value} className={`px-1 py-6 sm:px-6 lg:py-8 ${i === stats.length - 1 ? 'sm:col-span-2 lg:col-span-1' : ''}`}>
-            <Stat {...s} />
-          </div>
-        ))}
-      </dl>
+    <section id="stats" aria-label="Impact" className="relative py-8 md:py-12">
+      <div className="wrap">
+        <dl className="border-y border-line">
+          {stats.map((s, i) => {
+            const [n, suffix] = split(s.value)
+            return (
+              <Reveal key={s.value} delay={i * 0.04}>
+                <div className="tick group grid items-baseline gap-x-8 gap-y-1 border-b border-line py-5 last:border-b-0 md:grid-cols-[minmax(0,15rem)_minmax(0,1fr)] md:py-6">
+                  <dt className="font-display text-5xl font-bold leading-none tracking-tight text-fg md:text-7xl">
+                    <span className="sr-only">{s.value}</span>
+                    <span aria-hidden="true">
+                      <NumberTicker value={n} delay={i * 0.08} />
+                      <span className="text-teal">{suffix}</span>
+                    </span>
+                  </dt>
+                  <dd className="max-w-[55ch] text-base leading-relaxed text-muted md:text-lg">{s.label}</dd>
+                </div>
+              </Reveal>
+            )
+          })}
+        </dl>
+      </div>
     </section>
   )
 }

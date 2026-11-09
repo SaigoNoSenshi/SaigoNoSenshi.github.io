@@ -1,29 +1,43 @@
 @import "tailwindcss";
 
 @theme {
-  --font-heading: "Sora", sans-serif;
-  --font-body: "IBM Plex Sans", sans-serif;
+  --font-display: "Bricolage Grotesque", sans-serif;
+  --font-body: "Manrope", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
 
-  --color-bg: #0a0c10;
-  --color-surface: #11151b;
-  --color-hairline: #1f2630;
-  --color-fg: #e8edf2;
-  --color-muted: #9aa6b2;
-  --color-primary: #5eead4;
-  --color-amber: #f5b544;
+  --color-shell: #0b0f14;
+  --color-raised: #111821;
+  --color-line: #1e2a36;
+  --color-fg: #e6edf3;
+  --color-muted: #8b9aab;
+  --color-teal: #2dd4bf;
+  --color-amber: #f5b547;
+  --color-blue: #60a5fa;
+  --color-ok: #34d399;
+  --color-err: #f87171;
 
   --ease-out-strong: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+:root {
+  /* Page content sits right of the data rail; the rail hugs the left edge of the 1200px column. */
+  --rail-inset: 1rem;
+  --pl: 3rem;
+}
+@media (min-width: 768px) {
+  :root {
+    --pl: 4.5rem;
+  }
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
-    background: var(--color-bg);
+    background: var(--color-shell);
   }
   body {
     margin: 0;
-    background: var(--color-bg);
+    background: var(--color-shell);
     color: var(--color-fg);
     font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
@@ -32,12 +46,12 @@
     scroll-margin-top: 4.5rem;
   }
   :focus-visible {
-    outline: 2px solid var(--color-primary);
+    outline: 2px solid var(--color-teal);
     outline-offset: 3px;
     border-radius: 0.375rem;
   }
   ::selection {
-    background: rgb(94 234 212 / 0.3);
+    background: rgb(45 212 191 / 0.3);
   }
   @media (prefers-reduced-motion: reduce) {
     html {
@@ -51,31 +65,19 @@
     width: 100%;
     max-width: 1200px;
     margin-inline: auto;
-    padding-inline: 1.25rem;
+    padding-left: var(--pl);
+    padding-right: 1.25rem;
   }
   @media (min-width: 768px) {
     .wrap {
-      padding-inline: 2rem;
+      padding-right: 2rem;
     }
   }
 
-  .card {
-    background: var(--color-surface);
-    border: 1px solid var(--color-hairline);
-    border-radius: 1rem;
-  }
-
-  .chip {
-    display: inline-flex;
-    align-items: center;
-    border: 1px solid var(--color-hairline);
-    border-radius: 9999px;
-    background: rgb(255 255 255 / 0.02);
-    padding: 0.25rem 0.75rem;
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    line-height: 1.25rem;
-    color: var(--color-muted);
+  .panel {
+    background: var(--color-raised);
+    border: 1px solid var(--color-line);
+    border-radius: 0.75rem;
   }
 
   .mono-label {
@@ -86,37 +88,51 @@
     color: var(--color-muted);
   }
 
+  /* Short horizontal run from the data rail into the element's left edge. */
+  .tick {
+    position: relative;
+  }
+  .tick::before {
+    content: "";
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    width: calc(var(--pl) - var(--rail-inset));
+    height: 1px;
+    background: var(--color-line);
+  }
+
   .btn {
     display: inline-flex;
     min-height: 2.75rem;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    border-radius: 9999px;
+    border-radius: 0.5rem;
     padding: 0 1.25rem;
     font-size: 0.9375rem;
-    font-weight: 500;
+    font-weight: 600;
     white-space: nowrap;
-    transition: transform 160ms ease-out, background-color 160ms ease-out, border-color 160ms ease-out;
+    transition: transform 160ms var(--ease-out-strong), background-color 160ms var(--ease-out-strong), border-color 160ms var(--ease-out-strong);
   }
   .btn:active {
     transform: scale(0.97);
   }
   .btn-primary {
-    background: var(--color-primary);
-    color: var(--color-bg);
+    background: var(--color-teal);
+    color: var(--color-shell);
   }
   .btn-ghost {
-    border: 1px solid var(--color-hairline);
+    border: 1px solid var(--color-line);
     color: var(--color-fg);
-    background: rgb(255 255 255 / 0.02);
+    background: var(--color-raised);
   }
   @media (hover: hover) and (pointer: fine) {
     .btn-primary:hover {
-      background: #8ff3e3;
+      background: #5eead4;
     }
     .btn-ghost:hover {
-      border-color: var(--color-primary);
+      border-color: var(--color-teal);
     }
   }
 
@@ -126,23 +142,24 @@
     height: 2.75rem;
     align-items: center;
     justify-content: center;
-    border: 1px solid var(--color-hairline);
-    border-radius: 9999px;
+    border: 1px solid var(--color-line);
+    border-radius: 0.5rem;
+    background: var(--color-raised);
     color: var(--color-muted);
-    transition: transform 160ms ease-out, color 160ms ease-out, border-color 160ms ease-out;
+    transition: transform 160ms var(--ease-out-strong), color 160ms var(--ease-out-strong), border-color 160ms var(--ease-out-strong);
   }
   .icon-link:active {
     transform: scale(0.97);
   }
   @media (hover: hover) and (pointer: fine) {
     .icon-link:hover {
-      color: var(--color-primary);
-      border-color: var(--color-primary);
+      color: var(--color-teal);
+      border-color: var(--color-teal);
     }
   }
 
   .text-link {
-    color: var(--color-primary);
+    color: var(--color-teal);
     text-underline-offset: 4px;
   }
   @media (hover: hover) and (pointer: fine) {
@@ -152,46 +169,37 @@
   }
 }
 
-/* Hero backdrop: two soft light pools drifting slowly, plus static grain. Only transform animates. */
-.glow {
-  position: absolute;
-  width: 70vmax;
-  height: 70vmax;
-  border-radius: 9999px;
-  pointer-events: none;
-  will-change: transform;
+/* Hero fallback while the WebGL threads load, and the only backdrop under reduced motion. */
+.hero-lines {
+  background-image: repeating-linear-gradient(-25deg, transparent 0 46px, rgb(45 212 191 / 0.05) 46px 47px);
+  mask-image: linear-gradient(to right, transparent 20%, black 80%);
 }
-.glow-teal {
-  top: -35vmax;
-  right: -20vmax;
-  background: radial-gradient(closest-side, rgb(94 234 212 / 0.16), transparent);
-  animation: drift-a 26s ease-in-out infinite alternate;
-}
-.glow-amber {
-  bottom: -45vmax;
-  left: -25vmax;
-  background: radial-gradient(closest-side, rgb(245 181 68 / 0.09), transparent);
-  animation: drift-b 32s ease-in-out infinite alternate;
-}
-.grain {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.07;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
-}
-@keyframes drift-a {
-  to {
-    transform: translate3d(-6vmax, 5vmax, 0);
+
+@keyframes led {
+  50% {
+    opacity: 0.35;
   }
 }
-@keyframes drift-b {
+.led {
+  animation: led 2.4s ease-in-out infinite;
+}
+
+/* One amber packet crossing a schematic link. */
+@keyframes packet {
+  from {
+    transform: translateX(0);
+  }
   to {
-    transform: translate3d(7vmax, -4vmax, 0);
+    transform: translateX(calc(100% * 4));
   }
 }
+.packet {
+  animation: packet 2.2s linear infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .glow {
+  .led,
+  .packet {
     animation: none;
   }
 }
